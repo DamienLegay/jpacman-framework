@@ -1,11 +1,11 @@
 package nl.tudelft.jpacman.game;
 
-import java.util.List;
-
 import nl.tudelft.jpacman.board.Direction;
 import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.Level.LevelObserver;
 import nl.tudelft.jpacman.level.Player;
+
+import java.util.List;
 
 /**
  * A basic implementation of a Pac-Man game.

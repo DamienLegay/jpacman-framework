@@ -1,17 +1,14 @@
 package nl.tudelft.jpacman.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
+import nl.tudelft.jpacman.game.Game;
+import nl.tudelft.jpacman.ui.ScorePanel.ScoreFormatter;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import nl.tudelft.jpacman.game.Game;
-import nl.tudelft.jpacman.ui.ScorePanel.ScoreFormatter;
 
 /**
  * The default JPacMan UI frame. The PacManUI consists of the following

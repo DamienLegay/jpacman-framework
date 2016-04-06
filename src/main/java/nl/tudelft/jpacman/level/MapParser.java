@@ -1,17 +1,17 @@
 package nl.tudelft.jpacman.level;
 
+import nl.tudelft.jpacman.PacmanConfigurationException;
+import nl.tudelft.jpacman.board.Board;
+import nl.tudelft.jpacman.board.BoardFactory;
+import nl.tudelft.jpacman.board.Square;
+import nl.tudelft.jpacman.npc.NPC;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import nl.tudelft.jpacman.PacmanConfigurationException;
-import nl.tudelft.jpacman.board.Board;
-import nl.tudelft.jpacman.board.BoardFactory;
-import nl.tudelft.jpacman.board.Square;
-import nl.tudelft.jpacman.npc.NPC;
 
 /**
  * Creates new {@link Level}s from text representations.
