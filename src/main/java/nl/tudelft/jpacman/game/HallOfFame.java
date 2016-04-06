@@ -166,7 +166,7 @@ public class HallOfFame
      * @param bestScores The list of high scores to display.
      * @param bestPlayers The list of players to display.
      */
-    private void displayHoF(final int bestScores[], final String bestPlayers[])
+    private void displayHoF(final int bestScores[], final String... bestPlayers)
     {
         String text = "";
         final String options[] = {"Leave", "Reset"};
@@ -194,7 +194,7 @@ public class HallOfFame
      * @param bestScores The list of high scores to store.
      * @param bestPlayers The list of players associated to the high scores to store.
      */
-    private void saveUpdatedHoF(final int bestScores[], final String bestPlayers[])
+    private void saveUpdatedHoF(final int bestScores[], final String... bestPlayers)
     {
         try
         {
