@@ -94,17 +94,27 @@ public enum Achievement
         List<Achievement> recommendations = new ArrayList<>();
         try
         {
+            List<Achievement> obtained = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(player.getProfilePath()), Charset.defaultCharset()));
-            String toDisplay = "", line = reader.readLine(); //ignoring the first line, it's not directly related to recommendations.
-            while ((line = reader.readLine()) != null && recommendations.size() <= MAX_RECOMMENDATIONS)
+            //ignoring the first line, it's not directly related to recommendations.
+            String toDisplay = "", line = reader.readLine();
+            while ((line = reader.readLine()) != null)
             {
-                Achievement recommended = valueOf(line).recommended;
-                if (!recommendations.contains(recommended))
+                Achievement currentAchievement = valueOf(line);
+                if (!obtained.contains(currentAchievement)) obtained.add(currentAchievement);
+            }
+
+            for (int i = 0; i < obtained.size() && recommendations.size() <= MAX_RECOMMENDATIONS; i++)
+            {
+                Achievement recommended = obtained.get(i).recommended;
+                if (!recommendations.contains(recommended) && !obtained.contains(recommended))
                 {
                     recommendations.add(recommended);
                     toDisplay +=  recommended + ": " + recommended.getDescription() + System.getProperty("line.separator");
                 }
             }
+            //VICTOR is the default recommended achievement.
+            if (toDisplay.equals("")) toDisplay = VICTOR + ": " + VICTOR.getDescription();
             reader.close();
             JOptionPane.showMessageDialog(null, toDisplay, "Recommended achievements.", JOptionPane.PLAIN_MESSAGE);
         }
