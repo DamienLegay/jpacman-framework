@@ -89,6 +89,10 @@ public class Player extends Unit {
         return LOGIN_PATH;
     }
 
+    /**
+     * Returns the path of the player's profile file.
+     * @return The path of the player's profile file.
+     */
     public String getProfilePath()
     {
         return profilePath;
@@ -120,6 +124,14 @@ public class Player extends Unit {
         return true;
     }
 
+    /**
+     * Helper method to avoid code duplication.
+     * @param options The buttons that can be clicked.
+     * @param panel The JPanel displaying the choice.
+     * @param loginEntered The name entered by the player.
+     * @param title The title of the dialog box.
+     * @return The identifier of the button clicked.
+     */
     private int buttonChoice(String[] options, JPanel panel, JTextField loginEntered, String title)
     {
         int choice = 0;

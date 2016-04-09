@@ -30,6 +30,9 @@ public enum Achievement
      */
     private int bonusScore;
 
+    /**
+     * The achievement recommended to accomplish after a certain achievement was accomplished.
+     */
     private Achievement recommended;
 
     static
@@ -80,7 +83,11 @@ public enum Achievement
     {
         return bonusScore;
     }
-    
+
+    /**
+     * Offers the player achievements (at most MAX_RECOMMENDATIONS) to accomplish given that he has accomplished some other achievements.
+     * @param player The player currently logged in.
+     */
     @SuppressWarnings("checkstyle:linelength")
     public static void offerAchievements(Player player)
     {
