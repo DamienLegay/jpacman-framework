@@ -114,7 +114,7 @@ public enum Achievement
                 }
             }
             //VICTOR is the default recommended achievement.
-            if (toDisplay.equals("")) toDisplay = VICTOR + ": " + VICTOR.getDescription();
+            if (toDisplay.equals("") && !obtained.contains(VICTOR)) toDisplay = VICTOR + ": " + VICTOR.getDescription();
             reader.close();
             JOptionPane.showMessageDialog(null, toDisplay, "Recommended achievements.", JOptionPane.PLAIN_MESSAGE);
         }
