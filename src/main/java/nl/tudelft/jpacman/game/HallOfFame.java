@@ -43,7 +43,7 @@ public class HallOfFame
     }
 
     /**
-     * Get relative path of the running Hall of Fame.
+     * Get relative path of the default Hall of Fame.
      */
     public String getDefaultHoFPath()
     {
