@@ -2,6 +2,7 @@ package nl.tudelft.jpacman;
 
 import nl.tudelft.jpacman.board.BoardFactory;
 import nl.tudelft.jpacman.board.Direction;
+import nl.tudelft.jpacman.game.Achievement;
 import nl.tudelft.jpacman.game.Game;
 import nl.tudelft.jpacman.game.GameFactory;
 import nl.tudelft.jpacman.level.*;
@@ -149,11 +150,14 @@ public class Launcher {
 		PacManUiBuilder builder = new PacManUiBuilder().withDefaultButtons();
 		builder.addButton("Identification", () -> {
             Player player = game.getPlayers().get(0);
-            boolean loggedIn = player.authenticate();
-            if (loggedIn) player.displayAchievements();
+            if (player.authenticate()) player.displayAchievements();
         });
         builder.addButton("New player", () -> game.getPlayers().get(0).createNewPlayer());
-        builder.addButton("Stats", () -> game.getPlayers().get(0).displayProfileStats());
+        builder.addButton("Stats", () ->
+        {
+            Player player = game.getPlayers().get(0);
+            if (player.displayProfileStats()) Achievement.offerAchievements(player);
+        });
         addSinglePlayerKeys(builder, game);
         pacManUI = builder.build(game);
         pacManUI.start();

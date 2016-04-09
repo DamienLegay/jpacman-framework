@@ -89,6 +89,11 @@ public class Player extends Unit {
         return LOGIN_PATH;
     }
 
+    public String getProfilePath()
+    {
+        return profilePath;
+    }
+
     /**
      * Authenticates existing player profile.
      * @return Whether the identification was carried through or cancelled.
@@ -160,9 +165,8 @@ public class Player extends Unit {
             e.printStackTrace();
         }
         toDisplay += "</html>";
-        if ("<html></html>".equals(toDisplay)) JOptionPane.showMessageDialog(null, "No achievements earned yet.", "Awww", JOptionPane.PLAIN_MESSAGE);
+        if ("<html><br>Achievements: <br></html>".equals(toDisplay)) JOptionPane.showMessageDialog(null, "No achievements earned yet.", "Awww", JOptionPane.PLAIN_MESSAGE);
         else displayChoiceBox(new String[]{"Ok"}, toDisplay, "Achievements");
-
     }
 
     /**
@@ -483,12 +487,12 @@ public class Player extends Unit {
     /**
      * Displays the player's stats.
      */
-    public void displayProfileStats()
+    public boolean displayProfileStats()
     {
         if (playerName == null)
         {
             JOptionPane.showMessageDialog(null, "You are not logged in.", "Error", JOptionPane.PLAIN_MESSAGE);
-            return;
+            return false;
         }
         String toDisplay = "<html>";
         try
@@ -513,6 +517,7 @@ public class Player extends Unit {
         {
             e.printStackTrace();
         }
+        return true;
     }
 
     /**

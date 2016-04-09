@@ -1,11 +1,24 @@
 package nl.tudelft.jpacman.game;
 
+import nl.tudelft.jpacman.level.Player;
+
+import javax.swing.*;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The list of possible achievements.
  */
 public enum Achievement
 {
     VICTOR, WON_THRICE, SPEEDY_DEATH, AMBUSHED, OVER_9000;
+
+    /**
+     * The maximum number of achievements that can be recommended to the player.
+     */
+    public static final int MAX_RECOMMENDATIONS = 3;
 
     /**
      * A text description associated with the Achievement.
@@ -16,6 +29,8 @@ public enum Achievement
      * The amount of points the Achievement grants to the player when obtained.
      */
     private int bonusScore;
+
+    private Achievement recommended;
 
     static
     {
@@ -30,6 +45,12 @@ public enum Achievement
         SPEEDY_DEATH.bonusScore = 100;
         AMBUSHED.bonusScore = 150;
         OVER_9000.bonusScore = 999;
+
+        VICTOR.recommended = WON_THRICE;
+        WON_THRICE.recommended = OVER_9000;
+        SPEEDY_DEATH.recommended = AMBUSHED;
+        AMBUSHED.recommended = SPEEDY_DEATH;
+        OVER_9000.recommended = WON_THRICE;
     }
 
     /**
@@ -58,5 +79,31 @@ public enum Achievement
     public int getBonusScore()
     {
         return bonusScore;
+    }
+    
+    @SuppressWarnings("checkstyle:linelength")
+    public static void offerAchievements(Player player)
+    {
+        List<Achievement> recommendations = new ArrayList<>();
+        try
+        {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(player.getProfilePath()), Charset.defaultCharset()));
+            String toDisplay = "", line = reader.readLine(); //ignoring the first line, it's not directly related to recommendations.
+            while ((line = reader.readLine()) != null && recommendations.size() <= MAX_RECOMMENDATIONS)
+            {
+                Achievement recommended = valueOf(line).recommended;
+                if (!recommendations.contains(recommended))
+                {
+                    recommendations.add(recommended);
+                    toDisplay +=  recommended + ": " + recommended.getDescription() + System.getProperty("line.separator");
+                }
+            }
+            reader.close();
+            JOptionPane.showMessageDialog(null, toDisplay, "Recommended achievements.", JOptionPane.PLAIN_MESSAGE);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
