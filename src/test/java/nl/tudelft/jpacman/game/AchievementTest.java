@@ -52,7 +52,7 @@ public class AchievementTest
         final Player player = mock(Player.class);
         when(player.getProfilePath()).thenReturn(PROFILE_PATH);
         final String recommendation = Achievement.offerAchievements(player);
-        assertEquals("VICTOR: Won a level!", recommendation);
+        assertEquals("Incorrect default recommendation.", "VICTOR: Won a level!", recommendation);
     }
 
     /**
@@ -69,6 +69,6 @@ public class AchievementTest
         final Player player = mock(Player.class);
         when(player.getProfilePath()).thenReturn(PROFILE_PATH);
         String recommendation = Achievement.offerAchievements(player);
-        assertEquals("AMBUSHED: Killed by Pinky." + System.getProperty("line.separator"), recommendation);
+        assertEquals("Incorrect recommendation.", "AMBUSHED: Killed by Pinky." + System.getProperty("line.separator"), recommendation);
     }
 }
