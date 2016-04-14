@@ -11,6 +11,7 @@ import nl.tudelft.jpacman.sprite.PacManSprites;
 import nl.tudelft.jpacman.ui.PacManUI;
 import nl.tudelft.jpacman.ui.PacManUiBuilder;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
@@ -156,7 +157,7 @@ public class Launcher {
         builder.addButton("Stats", () ->
         {
             Player player = game.getPlayers().get(0);
-            if (player.displayProfileStats()) Achievement.offerAchievements(player);
+            if (player.displayProfileStats()) JOptionPane.showMessageDialog(null, Achievement.offerAchievements(player), "Recommended achievements.", JOptionPane.PLAIN_MESSAGE);
         });
         addSinglePlayerKeys(builder, game);
         pacManUI = builder.build(game);

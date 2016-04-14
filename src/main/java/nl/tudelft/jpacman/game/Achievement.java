@@ -89,7 +89,7 @@ public enum Achievement
      * @param player The player currently logged in.
      */
     @SuppressWarnings("checkstyle:linelength")
-    public static void offerAchievements(Player player)
+    public static String offerAchievements(Player player)
     {
         List<Achievement> recommendations = new ArrayList<>();
         try
@@ -100,27 +100,31 @@ public enum Achievement
             String toDisplay = "", line = reader.readLine();
             while ((line = reader.readLine()) != null)
             {
-                Achievement currentAchievement = valueOf(line);
-                if (!obtained.contains(currentAchievement)) obtained.add(currentAchievement);
+                Achievement currentAchievement = parseAchievement(line);
+                if (!obtained.contains(currentAchievement)) {
+                    obtained.add(currentAchievement);
+                }
             }
 
             for (int i = 0; i < obtained.size() && recommendations.size() <= MAX_RECOMMENDATIONS; i++)
             {
                 Achievement recommended = obtained.get(i).recommended;
-                if (!recommendations.contains(recommended) && !obtained.contains(recommended))
-                {
+                if (!recommendations.contains(recommended) && !obtained.contains(recommended)) {
                     recommendations.add(recommended);
                     toDisplay +=  recommended + ": " + recommended.getDescription() + System.getProperty("line.separator");
                 }
             }
             //VICTOR is the default recommended achievement.
-            if (toDisplay.equals("") && !obtained.contains(VICTOR)) toDisplay = VICTOR + ": " + VICTOR.getDescription();
+            if ("".equals(toDisplay) && !obtained.contains(VICTOR)) {
+                toDisplay = VICTOR + ": " + VICTOR.getDescription();
+            }
             reader.close();
-            JOptionPane.showMessageDialog(null, toDisplay, "Recommended achievements.", JOptionPane.PLAIN_MESSAGE);
+            return toDisplay;
         }
         catch (IOException e)
         {
             e.printStackTrace();
+            return "Error!";
         }
     }
 }
